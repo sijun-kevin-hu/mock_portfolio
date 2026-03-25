@@ -1,0 +1,152 @@
+/* ============================================
+   XBOX DASHBOARD PORTFOLIO — GLOBAL STYLES
+   ============================================ */
+
+:root {
+  /* Xbox color system */
+  --xbox-black: #0a0a0a;
+  --xbox-dark: #111111;
+  --xbox-charcoal: #1a1a1a;
+  --xbox-panel: #1e1e1e;
+  --xbox-panel-light: #252525;
+  --xbox-green: #107C10;
+  --xbox-green-bright: #52B043;
+  --xbox-green-glow: #3eda3e;
+  --xbox-green-dim: #0d5e0d;
+  --xbox-silver: #8c8c8c;
+  --xbox-silver-light: #b0b0b0;
+  --xbox-white: #e0e0e0;
+  --xbox-text: #cccccc;
+  --xbox-text-dim: #666666;
+
+  /* Fonts */
+  --font-heading: 'Orbitron', 'Rajdhani', sans-serif;
+  --font-sub: 'Rajdhani', sans-serif;
+  --font-body: 'Share Tech Mono', monospace;
+
+  /* Transitions */
+  --blade-speed: 0.5s;
+  --blade-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--xbox-black);
+  color: var(--xbox-text);
+  font-family: var(--font-body);
+}
+
+body {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='none' stroke='%2352B043' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='2' fill='%2352B043'/%3E%3Cline x1='12' y1='0' x2='12' y2='6' stroke='%2352B043' stroke-width='1.5'/%3E%3Cline x1='12' y1='18' x2='12' y2='24' stroke='%2352B043' stroke-width='1.5'/%3E%3Cline x1='0' y1='12' x2='6' y2='12' stroke='%2352B043' stroke-width='1.5'/%3E%3Cline x1='18' y1='12' x2='24' y2='12' stroke='%2352B043' stroke-width='1.5'/%3E%3C/svg%3E") 12 12, crosshair;
+}
+
+/* Scanline overlay */
+#root::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+}
+
+/* Noise texture overlay */
+#root::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--xbox-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--xbox-green-dim);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--xbox-green);
+}
+
+/* Selection */
+::selection {
+  background: var(--xbox-green);
+  color: var(--xbox-black);
+}
+
+/* Keyframe Animations */
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px var(--xbox-green-glow)); opacity: 1; }
+  50% { filter: drop-shadow(0 0 20px var(--xbox-green-glow)); opacity: 0.85; }
+}
+
+@keyframes bootFadeIn {
+  0% { opacity: 0; transform: scale(0.7); }
+  60% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bootFadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
+
+@keyframes bladeSlideIn {
+  0% { opacity: 0; transform: translateX(80px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bladeSlideOut {
+  0% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(-80px); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes xpFill {
+  0% { width: 0; }
+}
+
+/* Mobile nav button styles */
+@media (max-width: 768px) {
+  html, body, #root {
+    overflow: auto;
+  }
+}
